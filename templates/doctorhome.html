@@ -1,0 +1,79 @@
+{% extends "doctorlayout.html" %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Welcome Section -->
+    <div class="text-center mb-5">
+        <h2 class="fw-bold" style="color:#3fbbc0;">Welcome, Doctor</h2>
+        <p class="text-muted">You can manage and analyze patient data using machine learning models.</p>
+    </div>
+
+    <!-- Functionality Grid (3x3) -->
+    <div class="row g-4">
+        <!-- Row 1 -->
+        <div class="col-md-4">
+            <div class="card shadow-sm text-center p-3 h-100" style="border-top:5px solid #3fbbc0;">
+                <h5 class="fw-bold" style="color:#3fbbc0;">Model 1</h5>
+                <p class="text-muted">Random Forest Analysis</p>
+                <a href="{{ url_for('rf_results') }}" class="btn btn-sm" style="background:#3fbbc0; color:white;">Open</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm text-center p-3 h-100" style="border-top:5px solid #3fbbc0;">
+                <h5 class="fw-bold" style="color:#3fbbc0;">Model 2</h5>
+                <p class="text-muted">Naive Bayes Classifier</p>
+                <a href="{{ url_for('nb_results') }}" class="btn btn-sm" style="background:#3fbbc0; color:white;">Open</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm text-center p-3 h-100" style="border-top:5px solid #3fbbc0;">
+                <h5 class="fw-bold" style="color:#3fbbc0;">Compare</h5>
+                <p class="text-muted">Compare Model Accuracy</p>
+                <a href="{{ url_for('compare_models') }}" class="btn btn-sm" style="background:#3fbbc0; color:white;">Compare</a>
+            </div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="col-md-4">
+            <div class="card shadow-sm text-center p-3 h-100" style="border-top:5px solid #3fbbc0;">
+                <h5 class="fw-bold" style="color:#3fbbc0;">Predict</h5>
+                <p class="text-muted">Predict Patient Outcomes</p>
+                <a href="{{ url_for('predict') }}" class="btn btn-sm" style="background:#3fbbc0; color:white;">Predict</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm text-center p-3 h-100" style="border-top:5px solid #3fbbc0;">
+                <h5 class="fw-bold" style="color:#3fbbc0;">Treatment</h5>
+                <p class="text-muted">Suggest Treatment Plans</p>
+                <a href="{{ url_for('doctor_treatments') }}" class="btn btn-sm" style="background:#3fbbc0; color:white;">Open</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm text-center p-3 h-100" style="border-top:5px solid #3fbbc0;">
+                <h5 class="fw-bold" style="color:#3fbbc0;">Settings</h5>
+                <p class="text-muted">Manage Account Settings</p>
+                <a href="{{ url_for('doctor_updatepassword') }}" class="btn btn-sm" style="background:#3fbbc0; color:white;">Change Password</a>
+            </div>
+        </div>
+
+        
+        
+    </div>
+
+</div>
+<br/>
+<br/>
+{% endblock %}

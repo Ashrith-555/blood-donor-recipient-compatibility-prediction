@@ -1,0 +1,83 @@
+{% extends "receptionistlayout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="text-center mb-4">
+        <h2 class="fw-bold text-primary">Welcome, {{ session['username'] }}</h2>
+        <p class="text-muted">Receptionist Dashboard</p>
+    </div>
+
+    <div class="row">
+        <!-- Add Patient Card -->
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 mb-4">
+                <div class="card-body text-center">
+                    <i class="fa fa-user-plus fa-3x icon-theme mb-3"></i>
+                    <h5 class="card-title">Add Patient</h5>
+                    <p class="card-text text-muted">Register a new patient and details.</p>
+                    <a href="{{ url_for('add_patient') }}" class="btn custom-btn">Add Patient</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- View Patients Card -->
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 mb-4">
+                <div class="card-body text-center">
+                    <i class="fa fa-users fa-3x icon-theme mb-3"></i>
+                    <h5 class="card-title">View Patients</h5>
+                    <p class="card-text text-muted">Browse, update or remove patient records.</p>
+                    <a href="{{ url_for('patients_list') }}" class="btn custom-btn">View Patients</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Change Password Card -->
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 mb-4">
+                <div class="card-body text-center">
+                    <i class="fa fa-key fa-3x icon-theme mb-3"></i>
+                    <h5 class="card-title">Change Password</h5>
+                    <p class="card-text text-muted">Update your login password for security.</p>
+                    <a href="{{ url_for('receptionist_updatepassword') }}" class="btn custom-btn">Change Password</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+
+{% block extra_css %}
+<style>
+    .custom-btn {
+        background-color: #3fbbc0;
+        border-color: #3fbbc0;
+        color: #fff;
+        font-weight: 600;
+        transition: 0.3s ease;
+    }
+    .custom-btn:hover {
+        background-color: #34a6aa;
+        border-color: #34a6aa;
+        color: #fff;
+    }
+    .icon-theme {
+        color: #3fbbc0;
+    }
+</style>
+{% endblock %}
+
+{% endblock %}

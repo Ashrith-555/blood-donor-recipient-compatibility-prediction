@@ -1,0 +1,119 @@
+{% extends "doctorlayout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <h2 class="mb-4">Naive Bayes (NB) Model Results</h2>
+
+    <!-- Accuracy -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">Model Accuracy</h5>
+            <p class="card-text fs-5 text-success">
+                <b>{{ "%.2f"|format(accuracy * 100) }}%</b>
+            </p>
+
+            <!-- Correct & Incorrect Percentages -->
+            <p class="card-text text-primary">
+                ✅ Correct Predictions: <b>{{ "%.2f"|format(accuracy * 100) }}%</b>
+            </p>
+            <p class="card-text text-danger">
+                ❌ Incorrect Predictions: <b>{{ "%.2f"|format((1 - accuracy) * 100) }}%</b>
+            </p>
+        </div>
+    </div>
+
+    <!-- Training & Prediction Time -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">Time Efficiency</h5>
+            <p class="card-text">
+                ⏱ Training Time: <b>{{ time_efficiency.training_time_sec }} seconds</b><br>
+                ⚡ Prediction Time: <b>{{ time_efficiency.prediction_time_sec }} seconds</b>
+            </p>
+        </div>
+    </div>
+
+    <!-- Confusion Matrix -->
+   <!-- Confusion Matrix
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title">Confusion Matrix</h5>
+        <table class="table table-bordered table-striped text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th></th>
+                    {% for i in range(confusion_matrix|length) %}
+                        <th>Predicted {{ i }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in confusion_matrix %}
+                    <tr>
+                        <th>Actual {{ loop.index0 }}</th>
+                        {% for val in row %}
+                            <td>{{ val }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+ -->
+    <!-- Classification Report 
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title">Classification Report</h5>
+        <table class="table table-bordered table-striped text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Class</th>
+                    <th>Precision</th>
+                    <th>Recall</th>
+                    <th>F1-Score</th>
+                    <th>Support</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cls, metrics in classification_report.items() %}
+                    <tr>
+                        <td>{{ cls }}</td>
+                        <td>{{ metrics['precision'] }}</td>
+                        <td>{{ metrics['recall'] }}</td>
+                        <td>{{ metrics['f1-score'] }}</td>
+                        <td>{{ metrics['support'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+-->
+    <!-- Feature Columns 
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">Feature Columns</h5>
+            <ul class="list-group">
+                {% for col in feature_columns %}
+                    <li class="list-group-item">{{ col }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+-->
+</div>
+{% endblock %}

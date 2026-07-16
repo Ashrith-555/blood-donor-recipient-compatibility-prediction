@@ -1,0 +1,78 @@
+{% extends "doctorlayout.html" %}
+
+{% block content %}
+<div class="container mt-5" 
+     id="modelData"
+     data-rf-accuracy="{{ rf_accuracy }}"
+     data-nb-accuracy="{{ nb_accuracy }}"
+     data-rf-training="{{ rf_time.training_time_sec }}"
+     data-rf-prediction="{{ rf_time.prediction_time_sec }}"
+     data-nb-training="{{ nb_time.training_time_sec }}"
+     data-nb-prediction="{{ nb_time.prediction_time_sec }}">
+     
+    <h2 class="mb-4 text-center">Model Comparison: Random Forest Model vs NB Model</h2>
+
+    <!-- Model Comparison Cards -->
+    <div class="row mb-5">
+        <div class="col-md-6">
+            <div class="card shadow p-3">
+                <h4 class="text-primary">Random Forest Model</h4>
+                <p><strong>Accuracy:</strong> {{ "%.2f"|format(rf_accuracy*100) }}%</p>
+                <p class="text-success">✅ Correct Predictions: <b>{{ "%.2f"|format(rf_accuracy*100) }}%</b></p>
+                <p class="text-danger">❌ Incorrect Predictions: <b>{{ "%.2f"|format((1-rf_accuracy)*100) }}%</b></p>
+                <p>⏱ Training Time: <b>{{ rf_time.training_time_sec }} sec</b></p>
+                <p>⚡ Prediction Time: <b>{{ rf_time.prediction_time_sec }} sec</b></p>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow p-3">
+                <h4 class="text-success">NB Model</h4>
+                <p><strong>Accuracy:</strong> {{ "%.2f"|format(nb_accuracy*100) }}%</p>
+                <p class="text-success">✅ Correct Predictions: <b>{{ "%.2f"|format(nb_accuracy*100) }}%</b></p>
+                <p class="text-danger">❌ Incorrect Predictions: <b>{{ "%.2f"|format((1-nb_accuracy)*100) }}%</b></p>
+                <p>⏱ Training Time: <b>{{ nb_time.training_time_sec }} sec</b></p>
+                <p>⚡ Prediction Time: <b>{{ nb_time.prediction_time_sec }} sec</b></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <h5 class="text-center mb-3">📊 Accuracy Comparison</h5>
+            <canvas id="accuracyChart" height="200"></canvas>
+        </div>
+        <div class="col-md-4">
+            <h5 class="text-center mb-3">✅❌ Correct vs Incorrect</h5>
+            <canvas id="correctIncorrectChart" height="200"></canvas>
+        </div>
+        <div class="col-md-4">
+            <h5 class="text-center mb-3">⏱ Time Efficiency (ms)</h5>
+            <canvas id="timeChart" height="200"></canvas>
+        </div>
+    </div>
+
+    <!-- Overall Summary -->
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="alert alert-info text-center">
+                <strong>Summary:</strong> 
+                Random Forest Accuracy = {{ "%.2f"|format(rf_accuracy*100) }}% |
+                NB Accuracy = {{ "%.2f"|format(nb_accuracy*100) }}%.
+                {% if rf_accuracy > nb_accuracy %}
+                    <span class="text-primary">✅ Random Forest Model performed better.</span>
+                {% elif rf_accuracy < nb_accuracy %}
+                    <span class="text-success">✅ NB Model performed better.</span>
+                {% else %}
+                    <span class="text-warning">⚖️ Both models performed equally.</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/compare_charts.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "patientlayout.html" %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <!-- Welcome Section -->
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-primary">Welcome, {{ username }}</h2>
+        <p class="text-muted">Here you can view your treatments and updates from your doctor.</p>
+    </div>
+
+    <!-- Quick Access Cards (2 per row for clean look) -->
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm text-center p-3 h-100">
+                <h5 class="fw-bold">My Treatments</h5>
+                <p class="text-muted">View all treatments added by your doctor.</p>
+                <a href="{{ url_for('patient_treatments') }}" class="btn btn-primary btn-sm">View Treatments</a>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm text-center p-3 h-100">
+                <h5 class="fw-bold">Change Password</h5>
+                <p class="text-muted">Update your account password securely.</p>
+                <a href="{{ url_for('patient_updatepassword') }}" class="btn btn-warning btn-sm">Update</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<br/>
+<br/>
+{% endblock %}

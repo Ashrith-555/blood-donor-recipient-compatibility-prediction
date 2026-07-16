@@ -1,0 +1,185 @@
+{% extends "doctorlayout.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">🔍 Blood Donor-Recipient Match Prediction using RF Model (97%)</h2>
+    <form method="POST" action="{{ url_for('predict') }}">
+        <div class="row">
+            <!-- Donor Details -->
+            <div class="col-md-6">
+                <h4 class="text-primary">Donor Information</h4>
+
+                <div class="mb-3">
+                    <label>ABO Blood Group</label>
+                    <select name="ABO_Blood_Group" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="O" {% if form_data.get('ABO_Blood_Group') == 'O' %}selected{% endif %}>O</option>
+                        <option value="A" {% if form_data.get('ABO_Blood_Group') == 'A' %}selected{% endif %}>A</option>
+                        <option value="B" {% if form_data.get('ABO_Blood_Group') == 'B' %}selected{% endif %}>B</option>
+                        <option value="AB" {% if form_data.get('ABO_Blood_Group') == 'AB' %}selected{% endif %}>AB</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label>RhD Factor</label>
+                    <select name="RhD_Factor" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="Positive" {% if form_data.get('RhD_Factor') == 'Positive' %}selected{% endif %}>Positive</option>
+                        <option value="Negative" {% if form_data.get('RhD_Factor') == 'Negative' %}selected{% endif %}>Negative</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label>Donor Age</label>
+                    <input type="number" name="Donor_Age" class="form-control"
+                           value="{{ form_data.get('Donor_Age','') }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label>Donor Gender</label>
+                    <select name="Donor_Sex" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="Male" {% if form_data.get('Donor_Sex') == 'Male' %}selected{% endif %}>Male</option>
+                        <option value="Female" {% if form_data.get('Donor_Sex') == 'Female' %}selected{% endif %}>Female</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label>Donor Hb Level</label>
+                    <input type="number" step="0.1" name="Donor_Hb_Level" class="form-control"
+                           value="{{ form_data.get('Donor_Hb_Level','') }}" required>
+                </div>
+            </div>
+
+            <!-- Recipient Details -->
+            <div class="col-md-6">
+                <h4 class="text-success">Recipient Information</h4>
+
+                <div class="mb-3">
+                    <label>ABO Blood Group</label>
+                    <select name="Recipient_ABO_Blood_Group" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="O" {% if form_data.get('Recipient_ABO_Blood_Group') == 'O' %}selected{% endif %}>O</option>
+                        <option value="A" {% if form_data.get('Recipient_ABO_Blood_Group') == 'A' %}selected{% endif %}>A</option>
+                        <option value="B" {% if form_data.get('Recipient_ABO_Blood_Group') == 'B' %}selected{% endif %}>B</option>
+                        <option value="AB" {% if form_data.get('Recipient_ABO_Blood_Group') == 'AB' %}selected{% endif %}>AB</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label>RhD Factor</label>
+                    <select name="Recipient_RhD_Factor" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="Positive" {% if form_data.get('Recipient_RhD_Factor') == 'Positive' %}selected{% endif %}>Positive</option>
+                        <option value="Negative" {% if form_data.get('Recipient_RhD_Factor') == 'Negative' %}selected{% endif %}>Negative</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label>Recipient Age</label>
+                    <input type="number" name="Recipient_Age" class="form-control"
+                           value="{{ form_data.get('Recipient_Age','') }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label>Recipient Gender</label>
+                    <select name="Recipient_Sex" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="Male" {% if form_data.get('Recipient_Sex') == 'Male' %}selected{% endif %}>Male</option>
+                        <option value="Female" {% if form_data.get('Recipient_Sex') == 'Female' %}selected{% endif %}>Female</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label>Disease Type</label>
+                    <select name="Disease_Type" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="Normal" {% if form_data.get('Disease_Type') == 'Normal' %}selected{% endif %}>Normal</option>
+                        <option value="Oncology" {% if form_data.get('Disease_Type') == 'Oncology' %}selected{% endif %}>Oncology</option>
+                        <option value="Thalassemia" {% if form_data.get('Disease_Type') == 'Thalassemia' %}selected{% endif %}>Thalassemia</option>
+                        <option value="Trauma" {% if form_data.get('Disease_Type') == 'Trauma' %}selected{% endif %}>Trauma</option>
+                        <option value="Other" {% if form_data.get('Disease_Type') == 'Other' %}selected{% endif %}>Other</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Medical Info -->
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <h4 class="text-danger">Medical & Screening Information</h4>
+
+                <div class="mb-3">
+                    <label>History of Transfusions</label>
+                    <input type="number" name="History_Transfusions" class="form-control"
+                           value="{{ form_data.get('History_Transfusions','') }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label>Crossmatch Result</label>
+                    <select name="Crossmatch_Result" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="Compatible" {% if form_data.get('Crossmatch_Result') == 'Compatible' %}selected{% endif %}>Compatible</option>
+                        <option value="Incompatible" {% if form_data.get('Crossmatch_Result') == 'Incompatible' %}selected{% endif %}>Incompatible</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label>HIV Status</label>
+                    <select name="HIV_Status" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="Negative" {% if form_data.get('HIV_Status') == 'Negative' %}selected{% endif %}>Negative</option>
+                        <option value="Positive" {% if form_data.get('HIV_Status') == 'Positive' %}selected{% endif %}>Positive</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label>HBsAg Status</label>
+                    <select name="HBsAg_Status" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="Negative" {% if form_data.get('HBsAg_Status') == 'Negative' %}selected{% endif %}>Negative</option>
+                        <option value="Positive" {% if form_data.get('HBsAg_Status') == 'Positive' %}selected{% endif %}>Positive</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label>HCV Status</label>
+                    <select name="HCV_Status" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="Negative" {% if form_data.get('HCV_Status') == 'Negative' %}selected{% endif %}>Negative</option>
+                        <option value="Positive" {% if form_data.get('HCV_Status') == 'Positive' %}selected{% endif %}>Positive</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label>Syphilis Status</label>
+                    <select name="Syphilis_Status" class="form-control" required>
+                        <option value="">-- Select --</option>
+                        <option value="Negative" {% if form_data.get('Syphilis_Status') == 'Negative' %}selected{% endif %}>Negative</option>
+                        <option value="Positive" {% if form_data.get('Syphilis_Status') == 'Positive' %}selected{% endif %}>Positive</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-lg btn-primary">Predict Match</button>
+        </div>
+    </form>
+
+    {% if prediction is defined %}
+    <div class="alert alert-info mt-4 text-center">
+        <h4>🔮 Prediction Result:</h4>
+        <p>
+            Raw Output: <b>{{ prediction }}</b><br>
+            {% if prediction == 1 %}
+                ✅ Donor and Recipient are a <b>Suitable Match</b>.
+            {% else %}
+                ❌ Donor and Recipient are <b>Not Suitable</b>.
+            {% endif %}
+        </p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

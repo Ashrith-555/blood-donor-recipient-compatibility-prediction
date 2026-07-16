@@ -1,0 +1,96 @@
+{% extends 'mainlayout.html' %}
+
+{% block title %}Clinical Compatibility Guide{% endblock %}
+
+{% block content %}
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header py-5" style="background: linear-gradient(135deg, #d32f2f 0%, #ff5252 100%);">
+    <div class="container text-center py-5">
+        <h1 class="display-3 text-white mb-3 fw-bold animated slideInDown">Clinical Guidelines</h1>
+        <p class="text-white-50 fs-5">Understanding the Machine Learning Blood Compatibility Matrix</p>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Main Content Start -->
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-sm border-0 rounded-4 p-5 mb-5 wow fadeInUp" data-wow-delay=".2s">
+                <h2 class="fw-bold mb-4 text-dark"><i class="fas fa-stethoscope text-danger me-2"></i> Clinical Compatibility Factors</h2>
+                <p class="text-muted fs-5 mb-5">Our predictive Machine Learning models (Random Forest, Naïve Bayes, KNN, Decision Tree) rely on several critical medical variables to determine safe donor-recipient pairings. Below is an explanation of the core features evaluated by our algorithm.</p>
+                
+                <div class="row g-4">
+                    <!-- Feature 1 -->
+                    <div class="col-md-6">
+                        <div class="p-4 rounded bg-light h-100 border-start border-4 border-danger">
+                            <h4 class="fw-bold text-dark"><i class="fas fa-vial text-danger me-2"></i> 1. RhD Factor Importance</h4>
+                            <p class="text-muted">The Rhesus (Rh) factor is an inherited protein found on the surface of red blood cells. Our ML models strictly penalize Rh-positive to Rh-negative donations to prevent severe hemolytic reactions.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="col-md-6">
+                        <div class="p-4 rounded bg-light h-100 border-start border-4 border-danger">
+                            <h4 class="fw-bold text-dark"><i class="fas fa-microscope text-danger me-2"></i> 2. Crossmatch Results</h4>
+                            <p class="text-muted">A serological crossmatch verifies compatibility. The algorithm ingests historical crossmatch success/failure rates to flag risky pairings that might otherwise appear compatible by basic ABO typing.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="col-md-6">
+                        <div class="p-4 rounded bg-light h-100 border-start border-4 border-danger">
+                            <h4 class="fw-bold text-dark"><i class="fas fa-history text-danger me-2"></i> 3. Transfusion History</h4>
+                            <p class="text-muted">Patients with multiple past transfusions often develop alloantibodies. Our Random Forest model heavily weights this feature, requiring stricter matching criteria for frequent recipients.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="col-md-6">
+                        <div class="p-4 rounded bg-light h-100 border-start border-4 border-danger">
+                            <h4 class="fw-bold text-dark"><i class="fas fa-biohazard text-danger me-2"></i> 4. Disease Risk Factors</h4>
+                            <p class="text-muted">Donor disease history (e.g., infectious diseases, chronic conditions) is a primary elimination filter. The Naïve Bayes classifier calculates the probability of disease transmission based on systemic data.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ML Section -->
+            <div class="card shadow-lg border-0 rounded-4 p-5 wow fadeInUp" data-wow-delay=".4s" style="background: #fffafb;">
+                <h3 class="fw-bold text-dark text-center mb-4"><i class="fas fa-network-wired text-danger me-2"></i> Machine Learning in Hematology</h3>
+                <p class="text-center text-muted fs-5 mb-4">Why use four different algorithms?</p>
+                <div class="row text-center gy-4">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="bg-white p-3 rounded shadow-sm">
+                            <h5 class="fw-bold text-danger">Random Forest</h5>
+                            <p class="small text-muted mb-0">Highest overall accuracy. Handles non-linear clinical data efficiently by building multiple decision trees.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="bg-white p-3 rounded shadow-sm">
+                            <h5 class="fw-bold text-danger">Naïve Bayes</h5>
+                            <p class="small text-muted mb-0">Excellent for calculating independent probabilistic risks (like rare alloantibody presence).</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="bg-white p-3 rounded shadow-sm">
+                            <h5 class="fw-bold text-danger">KNN</h5>
+                            <p class="small text-muted mb-0">Identifies "nearest neighbor" patient profiles to suggest donors who matched similar past cases.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="bg-white p-3 rounded shadow-sm">
+                            <h5 class="fw-bold text-danger">Decision Tree</h5>
+                            <p class="small text-muted mb-0">Provides a transparent, human-readable flowchart of the compatibility decision for doctor review.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Main Content End -->
+
+{% endblock %}

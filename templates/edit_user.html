@@ -1,0 +1,78 @@
+{% extends "adminlayout.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm" role="alert">
+            <i class="bi bi-info-circle me-2"></i> {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="card shadow-lg rounded-3">
+        <div class="card-header bg-primary text-white text-center">
+            <h4 class="mb-0"><i class="bi bi-pencil-square me-2"></i> Edit User</h4>
+        </div>
+        <div class="card-body p-4">
+            <form method="POST" action="{{ url_for('update_user', userid=user.userid) }}">
+                <div class="row g-3">
+                    <!-- UserID (Read-only) -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">UserID</label>
+                        <input type="text" name="userid" class="form-control" value="{{ user.userid }}" readonly>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Password</label>
+                        <input type="password" name="password" class="form-control" value="{{ user.password }}">
+                    </div>
+
+                    <!-- Name -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Full Name</label>
+                        <input type="text" name="name" class="form-control" value="{{ user.name }}">
+                    </div>
+
+                    <!-- Mobile -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Mobile</label>
+                        <input type="text" name="mobile" class="form-control" value="{{ user.mobile }}">
+                    </div>
+
+                    <!-- Email -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Email ID</label>
+                        <input type="email" name="emailid" class="form-control" value="{{ user.emailid }}">
+                    </div>
+
+                    <!-- User Type Dropdown -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">User Type</label>
+                        <select name="usertype" class="form-select" required>
+                            <option value="receptionist" {% if user.usertype == 'receptionist' %}selected{% endif %}>Receptionist</option>
+                            <option value="doctor" {% if user.usertype == 'doctor' %}selected{% endif %}>Doctor</option>
+                            <option value="admin" {% if user.usertype == 'admin' %}selected{% endif %}>Admin</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="mt-4 text-center">
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="bi bi-check-circle me-2"></i> Update User
+                    </button>
+                    <a href="{{ url_for('users_list') }}" class="btn btn-secondary px-4 ms-2">
+                        <i class="bi bi-arrow-left me-2"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

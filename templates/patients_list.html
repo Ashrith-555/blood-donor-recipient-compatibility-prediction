@@ -1,0 +1,96 @@
+{% extends "receptionistlayout.html" %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm d-flex align-items-center" role="alert">
+            <i class="bi bi-info-circle me-2 fs-5"></i>
+            <div>{{ message }}</div>
+            <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-primary">Patients List</h2>
+        <a href="{{ url_for('add_patient') }}" class="btn btn-success fw-bold">
+            <i class="bi bi-person-plus-fill me-2"></i> Add Patient
+        </a>
+    </div>
+
+    <!-- Table Card -->
+    <div class="card shadow-lg rounded-4">
+        <div class="card-body p-3">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Patient ID</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Mobile</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for patient in patients %}
+                        <tr class="align-middle">
+                            <td><span class="fw-bold">{{ patient.patientid }}</span></td>
+                            <td>{{ patient.name }}</td>
+                            <td>{{ patient.address }}</td>
+                            <td>{{ patient.mobile }}</td>
+                            <td class="text-center">
+                                <a href="{{ url_for('edit_patient', patientid=patient.patientid) }}" 
+                                   class="btn btn-sm btn-outline-warning me-1">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+                                <a href="{{ url_for('delete_patient', patientid=patient.patientid) }}" 
+                                   class="btn btn-sm btn-outline-danger"
+                                   onclick="return confirm('Are you sure you want to delete this patient?');">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-4">
+                                <i class="bi bi-person-x fs-4"></i>
+                                <p class="mt-2 mb-0">No patients found. <a href="{{ url_for('add_patient') }}">Add one now</a>.</p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .table-hover tbody tr:hover {
+        background-color: rgba(91, 134, 229, 0.1);
+        transition: background-color 0.3s ease;
+    }
+    .btn-outline-warning:hover {
+        background-color: #ffc107;
+        color: #fff;
+    }
+    .btn-outline-danger:hover {
+        background-color: #dc3545;
+        color: #fff;
+    }
+    .fw-bold {
+        font-weight: 600;
+    }
+</style>
+{% endblock %}

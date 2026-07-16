@@ -1,0 +1,61 @@
+{% extends 'mainlayout.html' %}
+{% block title %}About us{% endblock %}
+
+{% block content %}
+<!--
+ 
+    <section id="call-to-action" class="call-to-action section accent-background">
+
+      <div class="container">
+        <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
+          <div class="col-xl-10">
+            <div class="text-center">
+              <h3>About us</h3>
+              <p>Medical Datasets Analysis using Efficient ML Algorithms.</p>
+              <a class="cta-btn" href="#">Get Access</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+-->
+
+<!-- About Section -->
+    <section id="about" class="about section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>About Us<br></h2>
+        <p>We build an automation for accurate blood donor matching prediction that can be used in a hospitals. </p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-4">
+          <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="100">
+            <img src="static/assets/img/about.jpg" class="img-fluid" alt="">
+            <a href="#" class="glightbox pulsating-play-btn"></a>
+          </div>
+          <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="200">
+            <h3>To enhance blood donor–recipient matching accuracy using ML models.</h3>
+            <p class="fst-italic">
+              This project proposes the development of a browser-based software application that leverages Machine Learning (ML) models such as K-Nearest Neighbour (KNN), Random Forest (RF) or Naïve Bayes, and Decision Tree to predict donor–recipient compatibility with higher accuracy. 
+            </p>
+            <ul>
+              <li><i class="bi bi-check2-all"></i> <span>To integrate Core medical factors in prediction (ABO, RhD, transfusion history, crossmatch results)..</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>To compare ML algorithms (KNN, RF, Naïve Bayes, Decision Tree) for best performance.</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>To provide a browser-based, role-specific hospital application.</span></li>
+            </ul>
+            <p>
+             We build an automation for accurate blood donor matching prediction that can be used in a hospitals. We propose a browser-based application that uses ML models (KNN, Random Forest, Naïve Bayes, Decision Tree) to predict donor–recipient compatibility based on core medical factors (ABO, RhD, crossmatch results, transfusion history, disease type) and extended features when available.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /About Section -->
+
+    
+{% endblock %}

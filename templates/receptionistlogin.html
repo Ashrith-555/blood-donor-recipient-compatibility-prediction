@@ -1,0 +1,89 @@
+{% extends 'mainlayout.html' %}
+
+{% block title %}Receptionist Login{% endblock %}
+
+{% block content %}
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header py-5" style="background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);">
+    <div class="container text-center py-5">
+        <h1 class="display-3 text-white mb-3 fw-bold animated slideInDown">Receptionist Login</h1>
+        <p class="text-white-50 fs-5">Securely access your receptionist dashboard</p>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Login Form Start -->
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5">
+            <div class="card shadow-lg rounded-4 p-5 wow fadeInUp" data-wow-delay=".3s">
+                
+                <div class="text-center mb-4">
+                    <i class="bi bi-person-circle fs-1 text-primary mb-2"></i>
+                    <h2 class="fw-bold mb-1">Welcome Back</h2>
+                    <p class="text-muted">Enter your credentials to login</p>
+                </div>
+
+                <!-- Flash messages -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <!-- Login Form -->
+                <form method="POST" action="{{ url_for('receptionist_login') }}" autocomplete="off">
+                    <div class="form-floating mb-4">
+                        <input type="text" name="userid" class="form-control rounded-3" id="userid" placeholder="User ID" required autocomplete="off">
+                        <label for="userid"><i class="bi bi-person-fill me-2"></i>Receptionist ID</label>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <input type="password" name="password" class="form-control rounded-3" id="password" placeholder="Password" required autocomplete="new-password">
+                        <label for="password"><i class="bi bi-lock-fill me-2"></i>Password</label>
+                    </div>
+                    <div class="d-grid">
+                        <button class="btn btn-primary btn-lg rounded-3 fw-bold" type="submit">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Receptionist Login
+                        </button>
+                    </div>
+                    <div class="text-center mt-3">
+                         <a href="{{ url_for('index')}}" class="text-decoration-none text-muted"><< Back to Home</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Login Form End -->
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    }
+    .form-floating input:focus ~ label {
+        color: #ff7e5f;
+        font-weight: 500;
+    }
+    .btn-primary {
+        background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+        border: none;
+    }
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #feb47b 0%, #ff7e5f 100%);
+    }
+</style>
+{% endblock %}

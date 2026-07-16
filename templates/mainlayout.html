@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+      <title>{% block title %}{% endblock %}</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- =========================
+     Favicons
+========================= -->
+<link rel="icon" href="{{ url_for('static', filename='assets/img/favicon.png') }}">
+<link rel="apple-touch-icon" href="{{ url_for('static', filename='assets/img/apple-touch-icon.png') }}">
+
+<!-- =========================
+     Google Fonts
+========================= -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- =========================
+     Vendor CSS
+========================= -->
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/aos/aos.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/fontawesome-free/css/all.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/glightbox/css/glightbox.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css') }}">
+
+<!-- =========================
+     Main CSS
+========================= -->
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
+
+  <!-- =======================================================
+  * Template Name: Medicio
+  * Template URL: https://bootstrapmade.com/medicio-free-bootstrap-theme/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header sticky-top">
+
+   <div class="topbar d-flex align-items-center" style="background-color: #d32f2f;">
+      <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="d-none d-md-flex align-items-center text-white">
+          <i class="far fa-clock me-2"></i> Monday - Saturday, 8AM to 10PM
+        </div>
+        <div class="d-flex align-items-center text-white" style="font-weight: 500;">
+          <i class="fas fa-phone-alt me-2"></i> Emergency Helpline +91 9353276114
+        </div>
+      </div>
+    </div><!-- End Top Bar -->
+
+    <div class="branding d-flex align-items-center" style="background-color: white; border-bottom: 1px solid #eee;">
+
+      <div class="container position-relative d-flex align-items-center justify-content-end">
+        <a href="{{url_for('index')}}" class="logo d-flex align-items-center me-auto" style="text-decoration: none;">
+          <i class="fas fa-tint text-danger" style="font-size: 32px; margin-right: 10px;"></i>
+          <div style="display: flex; flex-direction: column; justify-content: center;">
+            <h1 class="sitename" style="color: #444; font-size: 24px; font-weight: 800; margin: 0; line-height: 1;">Blood<span style="color: #d32f2f;">Link</span></h1>
+            <span style="font-size: 12px; color: #888; letter-spacing: 1px; font-weight: 500;">Connecting Lives</span>
+          </div>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('aboutus')}}">About Us</a></li>
+            <li><a href="{{ url_for('team')}}">Donors</a></li>
+            <li><a href="{{ url_for('info')}}">Recipients</a></li>
+            <li><a href="{{ url_for('contactus')}}">Contact Us</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+       <a class="cta-btn" href="{{ url_for('userlogin')}}" style="background-color: white; color: #d32f2f; border: 2px solid #d32f2f; font-weight: 700; border-radius: 5px; padding: 8px 20px;"><i class="fas fa-user me-2"></i>USER LOGIN</a>
+
+
+      </div>
+
+    </div>
+
+  </header>
+
+  <main class="main">
+
+    <div>
+{% block content %}
+
+
+{% endblock %}
+</div>
+
+
+  </main>
+
+  <footer id="footer" class="footer" style="background-color: #fffafb; padding-top: 50px;">
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-12 footer-about">
+          <a href="#" class="logo d-flex align-items-center mb-3" style="text-decoration: none;">
+            <i class="fas fa-tint text-danger me-2" style="font-size: 26px;"></i>
+            <div>
+              <span style="color: #333; font-weight: 800; font-size: 20px;">Blood<span style="color: #d32f2f;">Link</span></span><br>
+              <span style="font-size: 11px; color: #888; letter-spacing: 1px;">Connecting Lives</span>
+            </div>
+          </a>
+          <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Connecting blood donors, recipients, hospitals, and healthcare organizations through an efficient matching platform that helps save lives.</p>
+          <div style="font-size: 14px; color: #555;">
+            <p class="mb-2"><i class="fas fa-map-marker-alt text-danger me-2"></i> K V Shankaragowda Rd, PES College Campus, Mandya, Karnataka 571401</p>
+            <p class="mb-2"><i class="fas fa-phone-alt text-danger me-2"></i> +91 9353276114</p>
+            <p><i class="fas fa-envelope text-danger me-2"></i> support@bloodlink.com</p>
+          </div>
+          <div class="social-links d-flex mt-4 gap-2">
+            <a href="" style="width:35px;height:35px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid #ccc;color:#555;"><i class="fab fa-facebook-f"></i></a>
+            <a href="" style="width:35px;height:35px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid #ccc;color:#555;"><i class="fab fa-twitter"></i></a>
+            <a href="" style="width:35px;height:35px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid #ccc;color:#555;"><i class="fab fa-instagram"></i></a>
+            <a href="" style="width:35px;height:35px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid #ccc;color:#555;"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6 footer-links">
+          <h4 style="font-size:16px;font-weight:700;color:#222;margin-bottom:20px;">Useful Links</h4>
+          <ul style="list-style:none;padding:0;">
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size:10px;"></i><a href="{{ url_for('index') }}" style="color:#666;text-decoration:none;font-size:14px;">Home</a></li>
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size:10px;"></i><a href="{{ url_for('aboutus') }}" style="color:#666;text-decoration:none;font-size:14px;">About Us</a></li>
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size:10px;"></i><a href="{{ url_for('userlogin') }}" style="color:#666;text-decoration:none;font-size:14px;">Donor Registration</a></li>
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size:10px;"></i><a href="{{ url_for('info') }}" style="color:#666;text-decoration:none;font-size:14px;">Recipient Requests</a></li>
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size:10px;"></i><a href="{{ url_for('contactus') }}" style="color:#666;text-decoration:none;font-size:14px;">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6 footer-links">
+          <h4 style="font-size:16px;font-weight:700;color:#222;margin-bottom:20px;">Clinical Guidelines</h4>
+          <ul style="list-style:none;padding:0;">
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size:10px;"></i><a href="{{ url_for('clinical_guide') }}" style="color:#666;text-decoration:none;font-size:14px;">RhD Factor Importance</a></li>
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size:10px;"></i><a href="{{ url_for('clinical_guide') }}" style="color:#666;text-decoration:none;font-size:14px;">Crossmatch Explained</a></li>
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size:10px;"></i><a href="{{ url_for('clinical_guide') }}" style="color:#666;text-decoration:none;font-size:14px;">Transfusion History</a></li>
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size:10px;"></i><a href="{{ url_for('clinical_guide') }}" style="color:#666;text-decoration:none;font-size:14px;">Disease Risk Factors</a></li>
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size:10px;"></i><a href="{{ url_for('clinical_guide') }}" style="color:#666;text-decoration:none;font-size:14px;">ML in Hematology</a></li>
+          </ul>
+        </div>
+        
+        <!-- Technology Stack -->
+        <div class="col-lg-2 col-md-4 col-sm-6 footer-links">
+          <h4 style="font-size: 16px; font-weight: 700; color: #222; margin-bottom: 20px;">Technology Stack</h4>
+          <ul style="list-style: none; padding: 0;">
+            <li class="mb-2"><i class="fab fa-python text-danger me-2" style="font-size: 14px;"></i> <span style="color: #666; font-size: 14px;">Python & Flask</span></li>
+            <li class="mb-2"><i class="fas fa-brain text-danger me-2" style="font-size: 14px;"></i> <span style="color: #666; font-size: 14px;">Scikit-Learn (ML)</span></li>
+            <li class="mb-2"><i class="fas fa-database text-danger me-2" style="font-size: 14px;"></i> <span style="color: #666; font-size: 14px;">MySQL</span></li>
+            <li class="mb-2"><i class="fab fa-bootstrap text-danger me-2" style="font-size: 14px;"></i> <span style="color: #666; font-size: 14px;">Bootstrap 5</span></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <div style="background:white;padding:20px;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,0.05);display:flex;align-items:center;gap:15px;margin-bottom:20px;">
+            <div style="background:#d32f2f;color:white;width:45px;height:45px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div>
+              <span style="font-size:12px;font-weight:600;color:#555;display:block;margin-bottom:2px;">Emergency Helpline</span>
+              <span style="font-size:16px;font-weight:800;color:#d32f2f;display:block;">+91 9353276114</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="background-color:#d32f2f;color:white;padding:18px 0;margin-top:40px;">
+      <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <div style="font-size:13px;">&copy; 2026 BloodLink. All rights reserved.</div>
+        <div style="font-size:13px;">
+          <a href="#" onclick="alert('This is an academic project. Data is used for demonstration purposes only.'); return false;" style="color:white;text-decoration:none;margin-right:10px;">Privacy Policy</a> | 
+          <a href="#" onclick="alert('This is an academic project. Data is used for demonstration purposes only.'); return false;" style="color:white;text-decoration:none;margin-left:10px;">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- =========================
+     Vendor JS Files
+========================= -->
+<script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/vendor/php-email-form/validate.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/vendor/aos/aos.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+
+<!-- =========================
+     Main JS File
+========================= -->
+<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+</body>
+
+</html>

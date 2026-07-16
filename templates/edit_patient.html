@@ -1,0 +1,41 @@
+{% extends "receptionistlayout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <h2>Edit Patient</h2>
+    <form method="POST" action="{{ url_for('update_patient', patientid=patient.patientid) }}">
+        <div class="mb-3">
+            <label>Patient ID</label>
+            <input type="text" name="patientid" class="form-control" value="{{ patient.patientid }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" value="{{ patient.password }}">
+        </div>
+        <div class="mb-3">
+            <label>Name</label>
+            <input type="text" name="name" class="form-control" value="{{ patient.name }}">
+        </div>
+        <div class="mb-3">
+            <label>Address</label>
+            <textarea name="address" class="form-control" rows="2">{{ patient.address }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label>Mobile</label>
+            <input type="text" name="mobile" class="form-control" value="{{ patient.mobile }}">
+        </div>
+        <button type="submit" class="btn btn-primary">Update Patient</button>
+    </form>
+</div>
+{% endblock %}

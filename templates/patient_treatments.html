@@ -1,0 +1,34 @@
+{% extends "patientlayout.html" %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <div class="text-center mb-4">
+        <h2 class="fw-bold text-primary">My Treatments</h2>
+        <p class="text-muted">All treatments provided by your doctor are listed below.</p>
+    </div>
+
+    {% if treatments %}
+    <div class="row g-4">
+        {% for treatment in treatments %}
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-success">Treatment</h5>
+                    <p class="card-text">{{ treatment.treatment }}</p>
+                    <p class="text-muted mb-1"><strong>Date & Time:</strong> {{ treatment.datetime.strftime("%d-%m-%Y %H:%M") }}</p>
+                    <!--<p class="text-muted mb-0"><strong>Doctor:</strong> {{ treatment.doctor_name }}</p>-->
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info text-center">
+        No treatments have been added yet.
+    </div>
+    {% endif %}
+<br/>
+<br/>
+</div>
+{% endblock %}

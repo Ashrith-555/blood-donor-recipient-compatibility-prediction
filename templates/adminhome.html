@@ -1,0 +1,45 @@
+{% extends "adminlayout.html" %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Welcome Header -->
+    <div class="p-5 mb-4 rounded-4 text-white" style="background: linear-gradient(135deg, #36d1dc 0%, #2575fc 100%);">
+        <h1 class="fw-bold">Welcome, {{ session['username'] }}!</h1>
+        <p class="fs-5">This is your Admin Dashboard. Manage your system efficiently.</p>
+    </div>
+
+    
+
+    <!-- Dashboard Image -->
+    <div class="text-center">
+        <img src="{{ url_for('static', filename='assets/img/hero-carousel/hero-carousel-3.jpg') }}" class="img-fluid rounded-4 shadow-lg" alt="Dashboard Illustration">
+    </div>
+</div>
+<br/>
+<br/>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hover-scale {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hover-scale:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    }
+</style>
+{% endblock %}

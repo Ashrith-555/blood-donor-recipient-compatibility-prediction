@@ -1,0 +1,252 @@
+{% extends "adminlayout.html" %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm d-flex align-items-center" role="alert">
+            <i class="bi bi-info-circle me-2 fs-5"></i>
+            <div>{{ message }}</div>
+            <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Add User Card -->
+    <div class="card shadow-lg rounded-4">
+        <div class="card-header text-white text-center" style="background: linear-gradient(135deg,  #3fbbc0 100%);">
+            <h4 class="mb-0"><i class="bi bi-person-plus-fill me-2"></i> Add New User (Doctor/Member/Receptionist)</h4>
+        </div>
+        <div class="card-body p-4">
+            <form method="POST" action="{{ url_for('add_user') }}" id="addUserForm" novalidate autocomplete="off">
+                <div class="row g-3">
+
+                    <!-- UserID -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">UserID <span class="text-danger">*</span></label>
+                        <input type="text" name="userid" id="userid" class="form-control rounded-3" placeholder="Enter unique UserID" required autocomplete="off">
+                        <div class="invalid-feedback">UserID must contain only letters, numbers, and underscores (no spaces).</div>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Password <span class="text-danger">*</span></label>
+                        <input type="password" name="password" id="password" class="form-control rounded-3" placeholder="Enter password" required autocomplete="new-password">
+                        <div class="mt-2" id="passwordStrengthText" style="font-weight: bold; font-size: 0.85rem;"></div>
+                        <div class="invalid-feedback">Password must not be empty.</div>
+                    </div>
+
+                    <!-- Name -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Full Name <span class="text-danger">*</span></label>
+                        <input type="text" name="name" id="name" class="form-control rounded-3" placeholder="Enter full name" required>
+                        <div class="invalid-feedback">Name must contain only letters and spaces.</div>
+                    </div>
+
+                    <!-- Mobile -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Mobile <span class="text-danger">*</span></label>
+                        <input type="text" name="mobile" id="mobile" class="form-control rounded-3" placeholder="Enter 10-digit mobile number" required>
+                        <div class="invalid-feedback">Mobile must be exactly 10 digits starting with 6, 7, 8, or 9.</div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Email ID <span class="text-danger">*</span></label>
+                        <input type="email" name="emailid" id="emailid" class="form-control rounded-3" placeholder="Enter @gmail.com address" required>
+                        <div class="invalid-feedback">Must be a valid @gmail.com address.</div>
+                    </div>
+
+                    <!-- User Type Dropdown -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">User Type <span class="text-danger">*</span></label>
+                        <select name="usertype" id="usertype" class="form-select rounded-3" required>
+                            <option value="" disabled selected>-- Select User Type --</option>
+                            <option value="receptionist">Receptionist</option>
+                            <option value="doctor">Doctor</option>
+                        </select>
+                        <div class="invalid-feedback">Please select a User Type.</div>
+                    </div>
+
+                </div>
+
+                <!-- Submit Button -->
+                <div class="mt-4 text-center">
+                    <button type="submit" id="submitBtn" class="btn btn-success px-5 py-2 fw-bold shadow-sm hover-scale" disabled>
+                        <span id="btnText"><i class="bi bi-check-circle me-2"></i> Add User</span>
+                        <span id="btnSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    </button>
+                    <a href="{{ url_for('users_list') }}" class="btn btn-secondary px-5 py-2 ms-2 fw-bold shadow-sm hover-scale">
+                        <i class="bi bi-arrow-left me-2"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("addUserForm");
+    const userid = document.getElementById("userid");
+    const name = document.getElementById("name");
+    const mobile = document.getElementById("mobile");
+    const emailid = document.getElementById("emailid");
+    const password = document.getElementById("password");
+    const usertype = document.getElementById("usertype");
+    const submitBtn = document.getElementById("submitBtn");
+    const pwStrengthText = document.getElementById("passwordStrengthText");
+
+    // Regex patterns
+    const patterns = {
+        userid: /^[a-zA-Z0-9_]+$/,
+        name: /^[a-zA-Z\s]+$/,
+        mobile: /^[6-9]\d{9}$/,
+        emailid: /^[a-zA-Z0-9._%+-]+@gmail\.com$/
+    };
+
+    // Auto-formatting and event listeners
+    name.addEventListener("input", function() {
+        // Remove multiple spaces, keep single spaces
+        this.value = this.value.replace(/\s{2,}/g, ' ').replace(/[^a-zA-Z\s]/g, '');
+        validateField(this, patterns.name);
+    });
+    
+    name.addEventListener("blur", function() {
+        this.value = this.value.trim();
+        validateField(this, patterns.name);
+    });
+
+    emailid.addEventListener("input", function() {
+        this.value = this.value.toLowerCase().replace(/\s/g, '');
+        validateField(this, patterns.emailid);
+    });
+
+    userid.addEventListener("input", function() {
+        this.value = this.value.replace(/\s/g, ''); // no spaces allowed
+        validateField(this, patterns.userid);
+    });
+
+    mobile.addEventListener("input", function() {
+        this.value = this.value.replace(/\D/g, '').slice(0, 10); // only numbers, max 10
+        validateField(this, patterns.mobile);
+    });
+
+    usertype.addEventListener("change", function() {
+        if (this.value !== "") {
+            this.classList.remove("is-invalid");
+            this.classList.add("is-valid");
+        } else {
+            this.classList.remove("is-valid");
+            this.classList.add("is-invalid");
+        }
+        checkFormValidity();
+    });
+
+    password.addEventListener("input", function() {
+        const val = this.value;
+        if (val.length === 0) {
+            this.classList.remove("is-valid", "is-invalid");
+            pwStrengthText.innerText = "";
+            checkFormValidity();
+            return;
+        }
+
+        let strength = 0;
+        if (val.length >= 8) strength++;
+        if (/[A-Z]/.test(val)) strength++;
+        if (/[a-z]/.test(val)) strength++;
+        if (/[0-9]/.test(val)) strength++;
+        if (/[^A-Za-z0-9]/.test(val)) strength++;
+
+        if (strength <= 2) {
+            pwStrengthText.innerText = "Weak Password";
+            pwStrengthText.style.color = "#dc3545"; // red
+            this.classList.add("is-valid"); // still valid technically, just weak
+            this.classList.remove("is-invalid");
+        } else if (strength === 3 || strength === 4) {
+            pwStrengthText.innerText = "Medium Password";
+            pwStrengthText.style.color = "#ffc107"; // yellow
+            this.classList.add("is-valid");
+            this.classList.remove("is-invalid");
+        } else {
+            pwStrengthText.innerText = "Strong Password";
+            pwStrengthText.style.color = "#198754"; // green
+            this.classList.add("is-valid");
+            this.classList.remove("is-invalid");
+        }
+        checkFormValidity();
+    });
+
+    function validateField(field, regex) {
+        if (regex.test(field.value)) {
+            field.classList.remove("is-invalid");
+            field.classList.add("is-valid");
+        } else {
+            field.classList.remove("is-valid");
+            field.classList.add("is-invalid");
+        }
+        checkFormValidity();
+    }
+
+    function checkFormValidity() {
+        const isUserValid = userid.classList.contains("is-valid");
+        const isNameValid = name.classList.contains("is-valid");
+        const isMobileValid = mobile.classList.contains("is-valid");
+        const isEmailValid = emailid.classList.contains("is-valid");
+        const isPassValid = password.classList.contains("is-valid");
+        const isTypeValid = usertype.classList.contains("is-valid");
+
+        if (isUserValid && isNameValid && isMobileValid && isEmailValid && isPassValid && isTypeValid) {
+            submitBtn.disabled = false;
+        } else {
+            submitBtn.disabled = true;
+        }
+    }
+
+    form.addEventListener("submit", function(e) {
+        if (submitBtn.disabled) {
+            e.preventDefault();
+            return;
+        }
+        // Show loading state
+        document.getElementById("btnText").classList.add("d-none");
+        document.getElementById("btnSpinner").classList.remove("d-none");
+        submitBtn.disabled = true;
+    });
+});
+</script>
+<br/>
+<br/>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+    .hover-scale:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease;
+    }
+    .form-label {
+        font-weight: 600;
+    }
+    .form-control, .form-select {
+        transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .form-control:focus, .form-select:focus {
+        box-shadow: 0 0 8px rgba(0, 86, 255, 0.2);
+        border-color: #365df0;
+    }
+</style>
+{% endblock %}

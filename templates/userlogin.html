@@ -1,0 +1,70 @@
+{% extends 'mainlayout.html' %}
+{% block title %}About us{% endblock %}
+
+{% block content %}
+
+
+<!-- About Section -->
+    <section id="doctors" class="doctors section light-background">
+
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>User Login<br></h2>
+        <p>End users of the system can access to the system using their credentials such as user id and password. </p>
+      </div><!-- End Section Title -->
+
+      
+
+    </section><!-- /About Section -->
+
+<!-- Featured Services Section -->
+    <section id="featured-services" class="featured-services section">
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="fas fa-heartbeat icon"></i></div>
+              <h4><a href="{{ url_for('admin_login')}}" class="stretched-link">ADMINISTRATOR</a></h4>
+              <p>Click here for Admin Login.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="fas fa-pills icon"></i></div>
+              <h4><a href="{{ url_for('receptionist_login')}}" class="stretched-link">RECEPTIONIST</a></h4>
+              <p>Click here for Receptionist Login.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="fas fa-thermometer icon"></i></div>
+              <h4><a href="{{ url_for('doctor_login')}}" class="stretched-link">DOCTOR</a></h4>
+              <p>Click here for Doctor Login.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="fas fa-dna icon"></i></div>
+              <h4><a href="{{ url_for('patient_login')}}" class="stretched-link">PATIENT</a></h4>
+              <p>Click here for Patient Login.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Featured Services Section -->
+
+ 
+    
+
+    
+{% endblock %}

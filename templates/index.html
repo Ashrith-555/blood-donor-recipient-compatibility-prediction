@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>BloodLink - Connecting Lives</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- =========================
+     Favicons
+========================= -->
+<link rel="icon" href="{{ url_for('static', filename='assets/img/favicon.png') }}">
+<link rel="apple-touch-icon" href="{{ url_for('static', filename='assets/img/apple-touch-icon.png') }}">
+
+<!-- =========================
+     Google Fonts
+========================= -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- =========================
+     Vendor CSS
+========================= -->
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/aos/aos.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/fontawesome-free/css/all.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/glightbox/css/glightbox.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css') }}">
+
+<!-- =========================
+     Main CSS
+========================= -->
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
+
+  <!-- =======================================================
+  * Template Name: Medicio
+  * Template URL: https://bootstrapmade.com/medicio-free-bootstrap-theme/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header sticky-top">
+
+    <div class="topbar d-flex align-items-center" style="background-color: #d32f2f;">
+      <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="d-none d-md-flex align-items-center text-white">
+          <i class="far fa-clock me-2"></i> Monday - Saturday, 8AM to 10PM
+        </div>
+        <div class="d-flex align-items-center text-white" style="font-weight: 500;">
+          <i class="fas fa-phone-alt me-2"></i> Emergency Helpline +91 9353276114
+        </div>
+      </div>
+    </div><!-- End Top Bar -->
+
+    <div class="branding d-flex align-items-center" style="background-color: white; border-bottom: 1px solid #eee;">
+
+      <div class="container position-relative d-flex align-items-center justify-content-end">
+        <a href="{{ url_for('index')}}" class="logo d-flex align-items-center me-auto" style="text-decoration: none;">
+          <i class="fas fa-tint text-danger" style="font-size: 32px; margin-right: 10px;"></i>
+          <div style="display: flex; flex-direction: column; justify-content: center;">
+            <h1 class="sitename" style="color: #444; font-size: 24px; font-weight: 800; margin: 0; line-height: 1;">Blood<span style="color: #d32f2f;">Link</span></h1>
+            <span style="font-size: 12px; color: #888; letter-spacing: 1px; font-weight: 500;">Connecting Lives</span>
+          </div>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul style="font-weight: 600;">
+            <li><a href="{{ url_for('index') }}" style="color: #d32f2f; border-bottom: 2px solid #d32f2f;">HOME</a></li>
+            <li><a href="{{ url_for('aboutus')}}">ABOUT US</a></li>
+            <li><a href="{{ url_for('team')}}">DOCTORS</a></li>
+            <li><a href="{{ url_for('info')}}">RECIPIENTS</a></li>
+            <li><a href="{{ url_for('clinical_guide') }}">CLINICAL GUIDE</a></li>
+            <li><a href="{{ url_for('contactus')}}">CONTACT US</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <a class="cta-btn" href="{{ url_for('userlogin')}}" style="background-color: white; color: #d32f2f; border: 1px solid #d32f2f; font-weight: 600; border-radius: 5px; padding: 8px 25px;"><i class="fas fa-user text-danger me-2"></i>USER LOGIN</a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+<section id="hero" class="hero section">
+
+  <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+    <!-- Carousel Items -->
+    
+      <div class="carousel-item active">
+        <img src="{{ url_for('static', filename='assets/img/hero-carousel/hero-carousel-1.png') }}" 
+             class="d-block w-100" 
+             alt="Healthcare professionals working together">
+      </div>
+
+      <div class="carousel-item">
+        <img src="{{ url_for('static', filename='assets/img/hero-carousel/hero-carousel-2.png') }}" 
+             class="d-block w-100" 
+             alt="Modern medical technology in action">
+      </div>
+
+      <div class="carousel-item">
+        <img src="{{ url_for('static', filename='assets/img/hero-carousel/hero-carousel-3.png') }}" 
+             class="d-block w-100" 
+             alt="Patient care and support services">
+      </div>
+  
+    <!-- End Carousel Items -->
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+
+  </div>
+
+</section>
+<!-- /Hero Section -->
+
+
+    <!-- Featured Services Section -->
+    <section id="featured-services" class="featured-services section" style="background-color: #f8f9fa; padding-top: 0; padding-bottom: 60px;">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-item w-100" style="background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); display: flex; align-items: flex-start; gap: 15px;">
+              <div style="background: #fff0f0; width: 55px; height: 55px; min-width: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-tint text-danger" style="font-size: 24px;"></i></div>
+              <div>
+                <h4 style="font-size: 16px; font-weight: 700; color: #222; margin-bottom: 8px;">Blood Group Matching</h4>
+                <p style="font-size: 13px; color: #666; margin: 0; line-height: 1.5;">Identifies compatible donors and recipients based on blood type compatibility and medical requirements.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-item w-100" style="background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); display: flex; align-items: flex-start; gap: 15px;">
+              <div style="background: #fff0f0; width: 55px; height: 55px; min-width: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="far fa-calendar-alt text-danger" style="font-size: 24px;"></i></div>
+              <div>
+                <h4 style="font-size: 16px; font-weight: 700; color: #222; margin-bottom: 8px;">Donor Availability</h4>
+                <p style="font-size: 13px; color: #666; margin: 0; line-height: 1.5;">Tracks donor status, eligibility, and availability to support timely blood requests.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-item w-100" style="background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); display: flex; align-items: flex-start; gap: 15px;">
+              <div style="background: #fff0f0; width: 55px; height: 55px; min-width: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-hand-holding-medical text-danger" style="font-size: 24px;"></i></div>
+              <div>
+                <h4 style="font-size: 16px; font-weight: 700; color: #222; margin-bottom: 8px;">Recipient Requests</h4>
+                <p style="font-size: 13px; color: #666; margin: 0; line-height: 1.5;">Allows patients and hospitals to submit blood requests and receive suitable donor matches.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-item w-100" style="background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); display: flex; align-items: flex-start; gap: 15px;">
+              <div style="background: #fff0f0; width: 55px; height: 55px; min-width: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-ambulance text-danger" style="font-size: 24px;"></i></div>
+              <div>
+                <h4 style="font-size: 16px; font-weight: 700; color: #222; margin-bottom: 8px;">Emergency Support</h4>
+                <p style="font-size: 13px; color: #666; margin: 0; line-height: 1.5;">Provides quick access to nearby donors during urgent medical situations and critical shortages.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- /Featured Services Section -->
+
+  
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </main>
+
+  <footer id="footer" class="footer" style="background-color: #fffafb; padding-top: 60px; position: relative;">
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <!-- Brand Info -->
+        <div class="col-lg-4 col-md-12 footer-about">
+          <a href="#" class="logo d-flex align-items-center mb-3" style="text-decoration: none;">
+            <i class="fas fa-heart text-danger me-2" style="font-size: 28px;"></i>
+            <span class="sitename" style="color: #333; font-weight: 700; font-size: 20px;">Blood Donation Network</span>
+          </a>
+          <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Connecting blood donors, recipients, hospitals, and healthcare organizations through an efficient matching platform that helps save lives.</p>
+          <div class="footer-contact" style="font-size: 14px; color: #555;">
+            <p class="mb-2"><i class="fas fa-map-marker-alt text-danger me-2"></i> K V Shankaragowda Rd, PES College Campus, Mandya, Karnataka 571401</p>
+            <p class="mb-2"><i class="fas fa-phone-alt text-danger me-2"></i> +91 9353276114</p>
+            <p><i class="fas fa-envelope text-danger me-2"></i> support@bloodlink.com</p>
+          </div>
+          <div class="social-links d-flex mt-4 gap-2">
+            <a href="" style="width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid #ccc; color: #555;"><i class="fab fa-facebook-f"></i></a>
+            <a href="" style="width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid #ccc; color: #555;"><i class="fab fa-twitter"></i></a>
+            <a href="" style="width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid #ccc; color: #555;"><i class="fab fa-instagram"></i></a>
+            <a href="" style="width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid #ccc; color: #555;"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+
+        <!-- Useful Links -->
+        <div class="col-lg-2 col-md-4 col-sm-6 footer-links">
+          <h4 style="font-size: 16px; font-weight: 700; color: #222; margin-bottom: 20px;">Useful Links</h4>
+          <ul style="list-style: none; padding: 0;">
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size: 10px;"></i> <a href="{{ url_for('index') }}" style="color: #666; text-decoration: none; font-size: 14px;">Home</a></li>
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size: 10px;"></i> <a href="{{ url_for('aboutus') }}" style="color: #666; text-decoration: none; font-size: 14px;">About Us</a></li>
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size: 10px;"></i> <a href="{{ url_for('userlogin') }}" style="color: #666; text-decoration: none; font-size: 14px;">Donor Registration</a></li>
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size: 10px;"></i> <a href="{{ url_for('info') }}" style="color: #666; text-decoration: none; font-size: 14px;">Recipient Requests</a></li>
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size: 10px;"></i> <a href="{{ url_for('contactus') }}" style="color: #666; text-decoration: none; font-size: 14px;">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Clinical Guidelines -->
+        <div class="col-lg-2 col-md-4 col-sm-6 footer-links">
+          <h4 style="font-size:16px;font-weight:700;color:#222;margin-bottom:20px;">Clinical Guidelines</h4>
+          <ul style="list-style:none;padding:0;">
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size:10px;"></i><a href="{{ url_for('clinical_guide') }}" style="color:#666;text-decoration:none;font-size:14px;">RhD Factor Importance</a></li>
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size:10px;"></i><a href="{{ url_for('clinical_guide') }}" style="color:#666;text-decoration:none;font-size:14px;">Crossmatch Explained</a></li>
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size:10px;"></i><a href="{{ url_for('clinical_guide') }}" style="color:#666;text-decoration:none;font-size:14px;">Transfusion History</a></li>
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size:10px;"></i><a href="{{ url_for('clinical_guide') }}" style="color:#666;text-decoration:none;font-size:14px;">Disease Risk Factors</a></li>
+            <li class="mb-2"><i class="fas fa-chevron-right text-danger me-2" style="font-size:10px;"></i><a href="{{ url_for('clinical_guide') }}" style="color:#666;text-decoration:none;font-size:14px;">ML in Hematology</a></li>
+          </ul>
+        </div>
+
+        <!-- Technology Stack -->
+        <div class="col-lg-2 col-md-4 col-sm-6 footer-links">
+          <h4 style="font-size: 16px; font-weight: 700; color: #222; margin-bottom: 20px;">Technology Stack</h4>
+          <ul style="list-style: none; padding: 0;">
+            <li class="mb-2"><i class="fab fa-python text-danger me-2" style="font-size: 14px;"></i> <span style="color: #666; font-size: 14px;">Python & Flask</span></li>
+            <li class="mb-2"><i class="fas fa-brain text-danger me-2" style="font-size: 14px;"></i> <span style="color: #666; font-size: 14px;">Scikit-Learn (ML)</span></li>
+            <li class="mb-2"><i class="fas fa-database text-danger me-2" style="font-size: 14px;"></i> <span style="color: #666; font-size: 14px;">MySQL</span></li>
+            <li class="mb-2"><i class="fab fa-bootstrap text-danger me-2" style="font-size: 14px;"></i> <span style="color: #666; font-size: 14px;">Bootstrap 5</span></li>
+          </ul>
+        </div>
+
+        <!-- Emergency Card -->
+        <div class="col-lg-2 col-md-12">
+          <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: left; display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+            <div style="background: #d32f2f; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div>
+              <span style="font-size: 12px; font-weight: 600; color: #555; display: block; margin-bottom: 2px;">Emergency Helpline</span>
+              <span style="font-size: 16px; font-weight: 800; color: #d32f2f; display: block;">+91 9353276114</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div style="background-color: #d32f2f; color: white; padding: 20px 0; margin-top: 40px;">
+      <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <div style="font-size: 13px;">
+          &copy; 2026 BloodLink. All rights reserved.
+        </div>
+        <div style="font-size: 13px;">
+          <a href="#" onclick="alert('This is an academic project. Data is used for demonstration purposes only.'); return false;" style="color: white; text-decoration: none; margin-right: 10px;">Privacy Policy</a> | 
+          <a href="#" onclick="alert('This is an academic project. Data is used for demonstration purposes only.'); return false;" style="color: white; text-decoration: none; margin-left: 10px;">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- =========================
+     Vendor JS Files
+========================= -->
+<script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/vendor/php-email-form/validate.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/vendor/aos/aos.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+
+<!-- =========================
+     Main JS File
+========================= -->
+<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+</body>
+
+</html>
